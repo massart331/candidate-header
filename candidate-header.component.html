@@ -1,0 +1,22 @@
+<div *ngIf="candidate">
+  <div class="detail__header">
+    <div class="detail__wrap-img" (click)="typePage === 'add' ? uploadNewImage = !uploadNewImage: ''" *ngIf="!uploadNewImage">
+      <img *ngIf="candidate.url_image" [src]="candidate.url_image | safe: 'resourceUrl'" alt="" class="detail__img">
+    </div>
+    <div class="change-head" *ngIf="uploadNewImage">
+      <app-change-image [candidate]='candidate'
+                        [typeFolder]="'url_image'"
+                        (newData)='candidate=$event; uploadNewImage=!uploadNewImage'>
+      </app-change-image>
+    </div>
+    <div class="detail__wrap-head">
+      <h1 class="detail__full-name">{{candidate.name}} {{candidate.last_name}}</h1>
+      <span class="control-panel" [hidden]="typePage === 'cv'">
+        <button class="detail__but detail__but-edit" [hidden]="typePage === 'add'"
+                [routerLink]="['/','wiser', 'candidates', candidate.id, 'add']">Edit profile</button>
+        <button class="detail__but">Send message</button>
+        <button class="detail__but">Generate public profile</button>
+      </span>
+    </div>
+  </div>
+</div>
